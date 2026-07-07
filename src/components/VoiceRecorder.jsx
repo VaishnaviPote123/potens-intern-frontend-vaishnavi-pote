@@ -1,55 +1,47 @@
 import { FiMic } from "react-icons/fi";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../utils/translations";
 
-export default function VoiceRecorder({
-  setDescription,
-}) {
+export default function VoiceRecorder({ setDescription }) {
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const startRecording = () => {
-
     const SpeechRecognition =
       window.SpeechRecognition ||
       window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-
-      alert("Speech Recognition not supported.");
-
+      alert("Speech Recognition is not supported in this browser.");
       return;
-
     }
 
     const recognition = new SpeechRecognition();
 
-    recognition.lang = "en-IN";
+    // Change recognition language based on selected UI language
+    recognition.lang = language === "hi" ? "hi-IN" : "en-IN";
 
-    recognition.start();
+    recognition.continuous = false;
+    recognition.interimResults = false;
 
     recognition.onresult = (event) => {
-
-      setDescription(
-        event.results[0][0].transcript
-      );
-
+      setDescription(event.results[0][0].transcript);
     };
 
+    recognition.onerror = (event) => {
+      console.error("Speech Recognition Error:", event.error);
+    };
+
+    recognition.start();
   };
 
   return (
-
     <button
-
       onClick={startRecording}
-
-      className="flex items-center gap-3 bg-red-500 text-white px-5 py-3 rounded-2xl shadow"
-
+      className="flex items-center gap-3 bg-red-500 text-white px-5 py-3 rounded-2xl shadow hover:bg-red-600 transition"
     >
-
       <FiMic />
-
-      Voice Input
-
+      {t.voiceInput}
     </button>
-
   );
-
 }

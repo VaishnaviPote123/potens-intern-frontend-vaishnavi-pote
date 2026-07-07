@@ -4,26 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-
 import MobileLayout from "../components/MobileLayout";
 import Header from "../components/Header";
 import Button from "../components/Button";
-
+import Timeline from "../components/Timeline";
 
 import { useReport } from "../context/ReportContext";
-
 
 import {
   saveReport
 } from "../utils/storage";
 
-
 import {
   addToOfflineQueue,
   syncOfflineQueue
 } from "../utils/offlineQueue";
-
-
 
 function generateReference(){
 
@@ -34,30 +29,19 @@ function generateReference(){
 
 }
 
-
-
-
 export default function Confirmation(){
 
-
 const navigate = useNavigate();
-
 
 const {
  report,
  setReport
 }=useReport();
 
-
-
-
 useEffect(()=>{
-
 
  if(report.referenceId)
    return;
-
-
 
  const finalReport={
 
@@ -74,8 +58,6 @@ useEffect(()=>{
 
  };
 
-
-
  if(navigator.onLine){
 
    saveReport(finalReport);
@@ -87,21 +69,11 @@ useEffect(()=>{
 
  }
 
-
-
  setReport(finalReport);
-
-
 
 },[]);
 
-
-
-
-
-
 useEffect(()=>{
-
 
  const handleOnline=()=>{
 
@@ -111,12 +83,10 @@ useEffect(()=>{
 
  };
 
-
  window.addEventListener(
    "online",
    handleOnline
  );
-
 
  return()=>{
 
@@ -127,22 +97,13 @@ useEffect(()=>{
 
  };
 
-
 },[]);
-
-
-
-
-
 
 return (
 
 <MobileLayout>
 
-
 <Header />
-
-
 
 <motion.div
 
@@ -167,7 +128,6 @@ text-center
 
 >
 
-
 <FiCheckCircle
 
 size={80}
@@ -177,8 +137,6 @@ text-green-500
 "
 
 />
-
-
 
 <h1
 
@@ -194,9 +152,6 @@ Report Submitted
 
 </h1>
 
-
-
-
 <p
 
 className="
@@ -210,8 +165,6 @@ Reference ID:
 
 </p>
 
-
-
 <p
 
 className="
@@ -224,8 +177,9 @@ font-bold
 
 </p>
 
-
-
+{/* Timeline Added */}
+<div className="w-full mt-8 text-left">  <Timeline />
+</div>
 
 {
 !navigator.onLine && (
@@ -255,9 +209,6 @@ when internet returns.
 
 }
 
-
-
-
 <Button
 
 onClick={()=>navigate("/")}
@@ -272,14 +223,10 @@ Back Home
 
 </Button>
 
-
-
 </motion.div>
-
 
 </MobileLayout>
 
 );
-
 
 }
