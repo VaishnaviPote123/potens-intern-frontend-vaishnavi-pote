@@ -71,7 +71,7 @@ useEffect(()=>{
 
  setReport(finalReport);
 
-},[]);
+},[report, setReport]);
 
 useEffect(()=>{
 

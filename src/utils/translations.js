@@ -53,7 +53,11 @@ statusAssignedDesc:
 statusResolved: "Resolved",
 statusResolvedDesc:
   "The complaint will be marked resolved after completion.",
-submittedOn: "Submitted On",  
+submittedOn: "Submitted On",
+other: "Other",
+otherDesc: "Report another civic issue",
+otherPlaceholder: "Enter issue category",
+enterCategory: "Please enter a category",  
 },
 
   hi: {
@@ -111,5 +115,9 @@ statusResolved: "समाधान",
 statusResolvedDesc:
   "कार्य पूरा होने के बाद शिकायत का समाधान दिखाया जाएगा।",
   submittedOn: "जमा करने की तिथि",
+  other: "अन्य",
+otherDesc: "अन्य नागरिक समस्या की रिपोर्ट करें",
+otherPlaceholder: "समस्या की श्रेणी दर्ज करें",
+enterCategory: "कृपया श्रेणी दर्ज करें",
   },
 };
